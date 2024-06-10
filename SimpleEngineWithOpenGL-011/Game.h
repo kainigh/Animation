@@ -86,6 +86,10 @@ private:
 	vector<Actor*> pendingActors;
 	Camera* camera;
 
+	class CubeActor* a;
+	float platformPos = 100.0f;
+	float platformSpeed = 5.0f;
+
 	class FPSActor* fps;
 	class SpriteComponent* crosshair;
 	class FollowActor* follow;

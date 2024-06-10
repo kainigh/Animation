@@ -5,6 +5,8 @@
 //#include "FollowActor.h"
 #include "FPSActor.h"
 
+using namespace std;
+
 HUD::HUD() :
 	UIScreen(),
 	isTargetingEnemy(false),

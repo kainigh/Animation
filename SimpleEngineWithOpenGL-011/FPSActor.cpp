@@ -11,6 +11,7 @@
 #include "BoxComponent.h"
 #include "Collisions.h"
 
+using namespace std;
 
 FPSActor::FPSActor() :
 	Actor(),
@@ -164,6 +165,8 @@ void FPSActor::fixCollisions()
 	const AABB& playerBox = boxComponent->getWorldBox();
 	Vector3 pos = getPosition();
 
+	
+
 	auto& planes = getGame().getPlanes();
 	for (auto pa : planes)
 	{
@@ -200,9 +203,13 @@ void FPSActor::fixCollisions()
 				pos.z += dz;
 			}
 
+			//cout << "collision detected" << endl;
+
 			// Need to set position and update box component
 			setPosition(pos);
 			boxComponent->onUpdateWorldTransform();
 		}
+		//else
+			//cout << "No collision detected" << endl;
 	}
 }

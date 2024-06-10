@@ -70,11 +70,11 @@ void Game::load()
 	//orbit = new OrbitActor();
 	//path = new SplineActor();
 
-	CubeActor* a = new CubeActor();
-	a->setPosition(Vector3(200.0f, 105.0f, 0.0f));
-	a->setScale(100.0f);
+	a = new CubeActor();
+	a->setPosition(Vector3(100.0f, -1850.0f, -200.0f));
+	a->setScale(200.0f);
 	Quaternion q(Vector3::unitY, -Maths::piOver2);
-	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 4.0f));
+	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 1.0f));
 	a->setRotation(q);
 
 	SphereActor* b = new SphereActor();
@@ -107,7 +107,7 @@ void Game::load()
 
 	// Left/right walls
 	q = Quaternion(Vector3::unitX, Maths::piOver2);
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		PlaneActor* p = new PlaneActor();
 		p->setPosition(Vector3(start + i * size, start - size, 0.0f));
@@ -211,8 +211,14 @@ void Game::processInput()
 
 void Game::update(float dt)
 {
+
+
+	
+
 	if (state == GameState::Gameplay)
 	{
+
+		
 
 		// Update actors 
 		isUpdatingActors = true;
@@ -243,6 +249,15 @@ void Game::update(float dt)
 		{
 			delete deadActor;
 		}
+
+		a->setPosition(Vector3(platformPos, -1850.0f, -200.0f));
+		if (platformPos > 1000)
+			platformSpeed = -platformSpeed;
+
+		if (platformPos < -100)
+			platformSpeed = -platformSpeed;
+
+		platformPos += platformSpeed;
 
 	}
 	// Update UI screens
