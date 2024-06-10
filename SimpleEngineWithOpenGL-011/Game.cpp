@@ -95,6 +95,16 @@ void Game::load()
 		}
 	}
 
+	// Celling
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+			PlaneActor* p = new PlaneActor();
+			p->setPosition(Vector3(start + i * size, start + j * size, 500.0f));
+		}
+	}
+
 	// Left/right walls
 	q = Quaternion(Vector3::unitX, Maths::piOver2);
 	for (int i = 0; i < 10; i++)
@@ -119,6 +129,9 @@ void Game::load()
 		p = new PlaneActor();
 		p->setPosition(Vector3(-start + size, start + i * size, 0.0f));
 		p->setRotation(q);
+
+
+
 	}
 
 	// Setup lights
