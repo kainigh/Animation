@@ -79,7 +79,7 @@ void Game::load()
 
 	SphereActor* b = new SphereActor();
 	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
-	b->setScale(3.0f);
+	b->setScale(1.0f);
 
 	// Floor and walls
 
@@ -88,10 +88,14 @@ void Game::load()
 	const float size = 250.0f;
 	for (int i = 0; i < 10; i++)
 	{
+		
+
 		for (int j = 0; j < 10; j++)
 		{
-			PlaneActor* p = new PlaneActor();
-			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
+			
+				PlaneActor* p = new PlaneActor();
+				p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
+			
 		}
 	}
 
@@ -415,4 +419,9 @@ void Game::removePlane(PlaneActor* plane)
 {
 	auto iter = std::find(begin(planes), end(planes), plane);
 	planes.erase(iter);
+}
+
+void Game::addCube(CubeActor* cube)
+{
+	cubes.emplace_back(cube);
 }

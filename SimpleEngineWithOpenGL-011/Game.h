@@ -9,6 +9,7 @@
 #include "InputSystem.h"
 #include "PhysicsSystem.h"
 #include "PlaneActor.h"
+#include "CubeActor.h"
 #include "HUD.h"
 
 using std::vector;
@@ -65,6 +66,9 @@ public:
 	class FPSActor* getPlayer() { return fps; }
 	//class FollowActor* getPlayer() { return player; }
 
+	void addCube(class CubeActor* cube);
+	vector<CubeActor*>& getCubes() { return cubes; }
+
 
 private:
 	void processInput();
@@ -97,6 +101,7 @@ private:
 	class SplineActor* path;
 
 	vector<PlaneActor*> planes;
+	vector<CubeActor*> cubes;
 
 };
 
