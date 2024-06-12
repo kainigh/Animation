@@ -31,6 +31,7 @@ FPSActor::FPSActor() :
 
 	FPSModel = new Actor();
 	FPSModel->setScale(0.75f);
+	
 	meshComponent = new MeshComponent(FPSModel);
 	meshComponent->setMesh(Assets::getMesh("Mesh_Rifle"));
 

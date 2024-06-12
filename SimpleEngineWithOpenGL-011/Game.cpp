@@ -97,7 +97,7 @@ void Game::load()
 	const float size = 250.0f;
 	for (int i = 0; i < 10; i++)
 	{
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 5; j++)
 		{
 			/*if (i <= 1 || i > 8 && j == 3)
 			{
@@ -307,7 +307,7 @@ void Game::update(float dt)
 		if (elevatorPos > 650.0f)
 			elevatorSpeed = -elevatorSpeed;
 
-		if (elevatorPos < -150.0f)
+		if (elevatorPos < 350.0f)
 			elevatorSpeed = -elevatorSpeed;
 
 		elevatorPos += elevatorSpeed;
