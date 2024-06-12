@@ -97,24 +97,43 @@ void Game::load()
 	const float size = 250.0f;
 	for (int i = 0; i < 10; i++)
 	{
-		
-
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 3; j++)
 		{
-			
+			/*if (i <= 1 || i > 8 && j == 3)
+			{
+				cout << i << "  " << j << endl;
+				break;
+
+			}*/
+
 				PlaneActor* p = new PlaneActor();
 				p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
 			
 		}
 	}
 
+	for (int i = 1; i < 10; i++)
+	{
+		for (int j = 10; j < 11; j++)
+		{
+
+			PlaneActor* p = new PlaneActor();
+			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
+
+		}
+	}
+
+	
+
 	// Celling
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
-			PlaneActor* p = new PlaneActor();
-			p->setPosition(Vector3(start + i * size, start + j * size, 500.0f));
+			
+				PlaneActor* p = new PlaneActor();
+				p->setPosition(Vector3(start + i * size, start + j * size, 500.0f));
+			
 		}
 	}
 
@@ -433,7 +452,6 @@ void Game::removeActor(Actor* actor)
 		actors.pop_back();
 	}
 }
-
 
 void Game::pushUI(UIScreen* screen)
 {
