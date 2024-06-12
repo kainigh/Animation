@@ -86,9 +86,12 @@ private:
 	vector<Actor*> pendingActors;
 	Camera* camera;
 
-	class CubeActor* a;
-	float platformPos = 100.0f;
-	float platformSpeed = 5.0f;
+	class CubeActor* platform;
+	class CubeActor* elevator;
+	float elevatorPos = 650.0f;
+	float elevatorSpeed = 4.0f;
+	float platformPos = -200.0f;
+	float platformSpeed = 3.0f;
 
 	class FPSActor* fps;
 	class SpriteComponent* crosshair;
