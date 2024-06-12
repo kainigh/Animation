@@ -162,14 +162,27 @@ void FPSActor::fixCollisions()
 	// Need to recompute world transform to update world box
 	computeWorldTransform();
 
+
 	const AABB& playerBox = boxComponent->getWorldBox();
 	Vector3 pos = getPosition();
-
 	
 
+	auto& cubes = getGame().getCubes();
+	for (auto ca : cubes)
+	{
+		const AABB& cubeBox = ca->getBox()->getWorldBox();
+		if (Collisions::intersect(playerBox, cubeBox))
+		{
+			cout << "Cube intersection" << endl;
+		}
+
+	}
+
+	
 	auto& planes = getGame().getPlanes();
 	for (auto pa : planes)
 	{
+	
 		// Do we collide with this PlaneActor?
 		const AABB& planeBox = pa->getBox()->getWorldBox();
 		if (Collisions::intersect(playerBox, planeBox))
