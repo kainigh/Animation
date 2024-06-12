@@ -68,6 +68,7 @@ public:
 	class FPSActor* getPlayer() { return fps; }
 	//class FollowActor* getPlayer() { return player; }
 
+	float elevatorSpeed = 4.0f;
 
 private:
 	void processInput();
@@ -92,7 +93,7 @@ private:
 	class CubeActor* platform;
 	class CubeActor* elevator;
 	float elevatorPos = 650.0f;
-	float elevatorSpeed = 4.0f;
+	
 	float platformPos = -200.0f;
 	float platformSpeed = 3.0f;
 

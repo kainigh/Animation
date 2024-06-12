@@ -167,6 +167,7 @@ void FPSActor::fixCollisions()
 	const AABB& playerBox = boxComponent->getWorldBox();
 	Vector3 pos = getPosition();
 	
+	float elevatorMove = 0.0f;
 
 	auto& cubes = getGame().getCubes();
 	for (auto ca : cubes)
@@ -174,7 +175,13 @@ void FPSActor::fixCollisions()
 		const AABB& cubeBox = ca->getBox()->getWorldBox();
 		if (Collisions::intersect(playerBox, cubeBox))
 		{
-			cout << "Cube xxx intersection" << endl;
+
+			cout << "Cube xxx intersection  " << getGame().elevatorSpeed << "  " << elevatorMove << endl;
+			elevatorMove += 400.0f;
+
+			moveComponent->setForwardSpeed(elevatorMove);
+			
+			
 		}
 
 	}

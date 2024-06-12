@@ -15,6 +15,7 @@ public:
 	void setFootstepSurface(float value);
 	void setVisible(bool isVisible);
 	void fixCollisions();
+	
 
 private:
 	class MoveComponent* moveComponent;
