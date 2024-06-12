@@ -173,7 +173,7 @@ void FPSActor::fixCollisions()
 		const AABB& cubeBox = ca->getBox()->getWorldBox();
 		if (Collisions::intersect(playerBox, cubeBox))
 		{
-			cout << "Cube intersection" << endl;
+			cout << "Cube xxx intersection" << endl;
 		}
 
 	}

@@ -16,6 +16,8 @@
 #include "PauseScreen.h"
 #include <algorithm>
 
+using namespace std;
+
 bool Game::initialize()
 {
 	bool isWindowInit = window.initialize();
@@ -70,16 +72,23 @@ void Game::load()
 	//orbit = new OrbitActor();
 	//path = new SplineActor();
 
-	a = new CubeActor();
-	a->setPosition(Vector3(100.0f, -1850.0f, -200.0f));
-	a->setScale(200.0f);
+	elevator = new CubeActor();
+	elevator->setPosition(Vector3(100.0f, 1850.0f, -200.0f));
+	elevator->setScale(200.0f);
 	Quaternion q(Vector3::unitY, -Maths::piOver2);
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 1.0f));
-	a->setRotation(q);
+	elevator->setRotation(q);
 
-	SphereActor* b = new SphereActor();
+	platform = new CubeActor();
+	platform->setPosition(Vector3(100.0f, 650.0f, -200.0f));
+	platform->setScale(200.0f);
+	//Quaternion q(Vector3::unitY, -Maths::piOver2);
+	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 1.0f));
+	platform->setRotation(q);
+
+	/*SphereActor* b = new SphereActor();
 	b->setPosition(Vector3(200.0f, -75.0f, 0.0f));
-	b->setScale(1.0f);
+	b->setScale(3.0f);*/
 
 	// Floor and walls
 
@@ -88,24 +97,55 @@ void Game::load()
 	const float size = 250.0f;
 	for (int i = 0; i < 10; i++)
 	{
-		
-
-		for (int j = 0; j < 10; j++)
+		for (int j = 0; j < 3; j++)
 		{
-			
+			/*if (i <= 1 || i > 8 && j == 3)
+			{
+				cout << i << "  " << j << endl;
+				break;
+
+			}*/
+
 				PlaneActor* p = new PlaneActor();
 				p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
 			
 		}
 	}
 
+	for (int i = 1; i < 10; i++)
+	{
+		for (int j = 10; j < 11; j++)
+		{
+
+			PlaneActor* p = new PlaneActor();
+			p->setPosition(Vector3(start + i * size, start + j * size, -100.0f));
+
+		}
+	}
+
+	
+
 	// Celling
 	for (int i = 0; i < 10; i++)
 	{
 		for (int j = 0; j < 10; j++)
 		{
+			
+				PlaneActor* p = new PlaneActor();
+				p->setPosition(Vector3(start + i * size, start + j * size, 500.0f));
+			
+		}
+	}
+
+
+	for (int i = 0; i < 10; i++)
+	{
+		for (int j = 0; j < 10; j++)
+		{
+
 			PlaneActor* p = new PlaneActor();
-			p->setPosition(Vector3(start + i * size, start + j * size, 500.0f));
+			p->setPosition(Vector3(start + i * size, start + j * size, -500.0f));
+
 		}
 	}
 
@@ -146,9 +186,9 @@ void Game::load()
 	dir.specColor = Vector3(0.8f, 0.8f, 0.8f);
 
 	// Create spheres with audio components playing different sounds
-	SphereActor* soundSphere = new SphereActor();
+	/*SphereActor* soundSphere = new SphereActor();
 	soundSphere->setPosition(Vector3(500.0f, -75.0f, 0.0f));
-	soundSphere->setScale(1.0f);
+	soundSphere->setScale(1.0f);*/
 	//AudioComponent* ac = new AudioComponent(soundSphere);
 	//ac->playEvent("event:/FireLoop");
 
@@ -254,14 +294,23 @@ void Game::update(float dt)
 			delete deadActor;
 		}
 
-		a->setPosition(Vector3(platformPos, -1850.0f, -200.0f));
-		if (platformPos > 1000)
+		elevator->setPosition(Vector3(100.0f, 1850.0f, platformPos));
+		if (platformPos > 400.0f)
 			platformSpeed = -platformSpeed;
 
-		if (platformPos < -100)
+		if (platformPos < -600)
 			platformSpeed = -platformSpeed;
 
 		platformPos += platformSpeed;
+
+		platform->setPosition(Vector3(100.0f, elevatorPos, -200.0f));
+		if (elevatorPos > 650.0f)
+			elevatorSpeed = -elevatorSpeed;
+
+		if (elevatorPos < -150.0f)
+			elevatorSpeed = -elevatorSpeed;
+
+		elevatorPos += elevatorSpeed;
 
 	}
 	// Update UI screens
@@ -419,6 +468,8 @@ void Game::removePlane(PlaneActor* plane)
 {
 	auto iter = std::find(begin(planes), end(planes), plane);
 	planes.erase(iter);
+
+
 }
 
 void Game::addCube(CubeActor* cube)
