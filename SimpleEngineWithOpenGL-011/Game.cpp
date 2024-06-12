@@ -453,6 +453,7 @@ void Game::removeActor(Actor* actor)
 	}
 }
 
+
 void Game::pushUI(UIScreen* screen)
 {
 	UIStack.emplace_back(screen);
