@@ -40,6 +40,8 @@ FPSActor::FPSActor() :
 	boxComponent->setObjectBox(collision);
 	boxComponent->setShouldRotate(false);
 
+	setPosition(Vector3(0.0f, -500.0f, 0.0f));
+
 }
 
 void FPSActor::updateActor(float dt)
