@@ -193,7 +193,7 @@ void FPSActor::fixCollisions()
 			if (ca->getLable() == "elevator")
 			{
 				
-				pos.z = getGame().getCubes().at(0)->getPosition().z;
+				pos.z = getGame().getCubes().at(0)->getPosition().z + 150.0f;
 				setPosition(pos);
 			}
 		}
