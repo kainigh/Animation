@@ -40,7 +40,7 @@ FPSActor::FPSActor() :
 	boxComponent->setObjectBox(collision);
 	boxComponent->setShouldRotate(false);
 
-	setPosition(Vector3(0.0f, -500.0f, 0.0f));
+	setPosition(Vector3(0.0f, -500.0f, -15.0f));
 
 }
 
@@ -169,7 +169,7 @@ void FPSActor::fixCollisions()
 
 	const AABB& playerBox = boxComponent->getWorldBox();
 	Vector3 pos = getPosition();
-	
+
 	//forwardSpeed = 0.0f;
 
 	auto& cubes = getGame().getCubes();
@@ -180,24 +180,34 @@ void FPSActor::fixCollisions()
 		{
 
 			//cout << "Cube xxx intersection  " << getGame().elevatorSpeed << "  "  << endl;
-			
+
 			//pos.y = getGame().elevatorSpeed + 400.0f;
 
-			
-			pos.y = getGame().getCubes().at(1)->getPosition().y;
+			if (ca->getLable() == "platform")
+			{
+				pos.y = getGame().getCubes().at(1)->getPosition().y;
+				setPosition(pos);
+			}
+
+
+			if (ca->getLable() == "elevator")
+			{
+				
+				pos.z = getGame().getCubes().at(0)->getPosition().z;
+				setPosition(pos);
+			}
+		}
 
 		
 
-		}
-
 	}
-	setPosition(pos);
-
 	
+
+
 	auto& planes = getGame().getPlanes();
 	for (auto pa : planes)
 	{
-	
+
 		// Do we collide with this PlaneActor?
 		const AABB& planeBox = pa->getBox()->getWorldBox();
 		if (Collisions::intersect(playerBox, planeBox))
@@ -232,10 +242,21 @@ void FPSActor::fixCollisions()
 			}
 
 
+
 			// Need to set position and update box component
 			setPosition(pos);
 			boxComponent->onUpdateWorldTransform();
 		}
+
+		/*for (auto ca : cubes)
+		{
+			if (!Collisions::intersect(playerBox, planeBox) && ca->getLable() != "platform")
+			{
+				pos.z -= 0.05f;
+				setPosition(pos);
+			}
+		}*/
+		
 		
 	}
 }

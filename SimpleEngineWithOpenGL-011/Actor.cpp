@@ -43,6 +43,11 @@ void Actor::setScale(float scaleP)
 	mustRecomputeWorldTransform = true;
 }
 
+void Actor::setLable(std::string lableP)
+{
+	lable = lableP;
+}
+
 void Actor::setRotation(Quaternion rotationP)
 {
 	rotation = rotationP;

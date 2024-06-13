@@ -12,6 +12,7 @@
 #include "CubeActor.h"
 #include "HUD.h"
 
+
 using std::vector;
 
 enum class GameState
@@ -69,6 +70,7 @@ public:
 	//class FollowActor* getPlayer() { return player; }
 
 	float platformSpeed = 4.0f;
+	
 
 private:
 	void processInput();

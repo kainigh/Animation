@@ -14,4 +14,6 @@ CubeActor::CubeActor()
 	box->setObjectBox(mesh->getBox());
 
 	getGame().addCube(this);
+
+
 }

@@ -75,6 +75,7 @@ void Game::load()
 	elevator = new CubeActor();
 	elevator->setPosition(Vector3(100.0f, 1850.0f, -200.0f));
 	elevator->setScale(200.0f);
+	elevator->setLable("elevator");
 	Quaternion q(Vector3::unitY, -Maths::piOver2);
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 1.0f));
 	elevator->setRotation(q);
@@ -82,6 +83,7 @@ void Game::load()
 	platform = new CubeActor();
 	platform->setPosition(Vector3(100.0f, 650.0f, -200.0f));
 	platform->setScale(200.0f);
+	platform->setLable("platform");
 	//Quaternion q(Vector3::unitY, -Maths::piOver2);
 	q = Quaternion::concatenate(q, Quaternion(Vector3::unitZ, Maths::pi + Maths::pi / 1.0f));
 	platform->setRotation(q);
@@ -302,6 +304,7 @@ void Game::update(float dt)
 			elevatorSpeed = -elevatorSpeed;
 
 		elevatorPos += elevatorSpeed;
+
 
 		platform->setPosition(Vector3(100.0f, platformPos, -185.0f));
 		if (platformPos > 650.0f)
