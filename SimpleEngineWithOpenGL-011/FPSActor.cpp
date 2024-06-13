@@ -77,6 +77,7 @@ void FPSActor::actorInput(const InputState& inputState)
 	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_W))
 	{
 		forwardSpeed += 400.0f;
+		
 	}
 	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_S))
 	{
@@ -167,7 +168,7 @@ void FPSActor::fixCollisions()
 	const AABB& playerBox = boxComponent->getWorldBox();
 	Vector3 pos = getPosition();
 	
-	float elevatorMove = 0.0f;
+	//forwardSpeed = 0.0f;
 
 	auto& cubes = getGame().getCubes();
 	for (auto ca : cubes)
@@ -176,12 +177,19 @@ void FPSActor::fixCollisions()
 		if (Collisions::intersect(playerBox, cubeBox))
 		{
 
-			cout << "Cube xxx intersection  " << getGame().elevatorSpeed << "  " << elevatorMove << endl;
-			elevatorMove += 400.0f;
+			cout << "Cube xxx intersection  " << getGame().elevatorSpeed << "  "  << endl;
+			//forwardSpeed += 400.0f;
 
-			moveComponent->setForwardSpeed(elevatorMove);
+			//moveComponent->setForwardSpeed(forwardSpeed);
 			
+			//pos.y = getGame().elevatorSpeed + 400.0f;
+
+			pos.y = getGame().getCubes().at(0)->getPosition().y;
+
 			
+			setPosition(pos);
+			//boxComponent->onUpdateWorldTransform();
+
 		}
 
 	}
@@ -224,13 +232,11 @@ void FPSActor::fixCollisions()
 				pos.z += dz;
 			}
 
-			//cout << "collision detected" << endl;
 
 			// Need to set position and update box component
 			setPosition(pos);
 			boxComponent->onUpdateWorldTransform();
 		}
-		//else
-			//cout << "No collision detected" << endl;
+		
 	}
 }
