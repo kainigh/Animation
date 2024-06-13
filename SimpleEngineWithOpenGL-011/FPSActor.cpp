@@ -40,7 +40,7 @@ FPSActor::FPSActor() :
 	boxComponent->setObjectBox(collision);
 	boxComponent->setShouldRotate(false);
 
-	setPosition(Vector3(0.0f, -500.0f, -15.0f));
+	setPosition(Vector3(0.0f, -500.0f, 0.0f));
 
 }
 
@@ -171,7 +171,7 @@ void FPSActor::fixCollisions()
 	Vector3 pos = getPosition();
 
 	bool isCubeIntersect;
-	bool isPlaneIntersect = false;
+	bool isPlaneIntersect;
 
 	auto& cubes = getGame().getCubes();
 	for (auto ca : cubes)
@@ -215,6 +215,7 @@ void FPSActor::fixCollisions()
 		const AABB& planeBox = pa->getBox()->getWorldBox();
 		if (Collisions::intersect(playerBox, planeBox))
 		{
+			isPlaneIntersect = true;
 			// Calculate all our differences
 			float dx1 = planeBox.max.x - playerBox.min.x;
 			float dx2 = planeBox.min.x - playerBox.max.x;
@@ -250,16 +251,17 @@ void FPSActor::fixCollisions()
 			setPosition(pos);
 			boxComponent->onUpdateWorldTransform();
 		}
+		else
+			isPlaneIntersect = false;
+		
+		
+		
+	}
 
-		for (auto ca : cubes)
-		{
-			if (!Collisions::intersect(playerBox, planeBox) && !isCubeIntersect)
-			{
-				pos.z -= 0.05f;
-				setPosition(pos);
-			}
-		}
-		
-		
+	if (!isPlaneIntersect && !isCubeIntersect)
+	{
+		pos.z -= 5.5f;
+		setPosition(pos);
+		boxComponent->onUpdateWorldTransform();
 	}
 }
