@@ -179,22 +179,19 @@ void FPSActor::fixCollisions()
 		if (Collisions::intersect(playerBox, cubeBox))
 		{
 
-			cout << "Cube xxx intersection  " << getGame().elevatorSpeed << "  "  << endl;
-			//forwardSpeed += 400.0f;
-
-			//moveComponent->setForwardSpeed(forwardSpeed);
+			//cout << "Cube xxx intersection  " << getGame().elevatorSpeed << "  "  << endl;
 			
 			//pos.y = getGame().elevatorSpeed + 400.0f;
 
-			pos.y = getGame().getCubes().at(0)->getPosition().y;
-
 			
-			setPosition(pos);
-			//boxComponent->onUpdateWorldTransform();
+			pos.y = getGame().getCubes().at(1)->getPosition().y;
+
+		
 
 		}
 
 	}
+	setPosition(pos);
 
 	
 	auto& planes = getGame().getPlanes();

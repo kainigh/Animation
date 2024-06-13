@@ -294,23 +294,26 @@ void Game::update(float dt)
 			delete deadActor;
 		}
 
-		platform->setPosition(Vector3(100.0f, 1850.0f, platformPos));
-		if (platformPos > 400.0f)
+		elevator->setPosition(Vector3(100.0f, 1850.0f, elevatorPos)); 
+		if (elevatorPos > 400.0f)
+			elevatorSpeed = -elevatorSpeed;
+
+		if (elevatorPos < -600)
+			elevatorSpeed = -elevatorSpeed;
+
+		elevatorPos += elevatorSpeed;
+
+		platform->setPosition(Vector3(100.0f, platformPos, -185.0f));
+		if (platformPos > 650.0f)
 			platformSpeed = -platformSpeed;
 
-		if (platformPos < -600)
+		if (platformPos < 350.0f)
 			platformSpeed = -platformSpeed;
 
 		platformPos += platformSpeed;
 
-		elevator->setPosition(Vector3(100.0f, elevatorPos, -185.0f));
-		if (elevatorPos > 650.0f)
-			elevatorSpeed = -elevatorSpeed;
 
-		if (elevatorPos < 350.0f)
-			elevatorSpeed = -elevatorSpeed;
 
-		elevatorPos += elevatorSpeed;
 
 	}
 	// Update UI screens
