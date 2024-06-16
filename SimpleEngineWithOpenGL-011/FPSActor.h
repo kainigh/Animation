@@ -25,6 +25,7 @@ private:
 	class Actor* FPSModel;
 	//SoundEvent footstep;
 	float lastFootstep;
+	float forwardSpeed;
 	class BoxComponent* boxComponent;
 
 };

@@ -73,7 +73,7 @@ void FPSActor::updateActor(float dt)
 
 void FPSActor::actorInput(const InputState& inputState)
 {
-	float forwardSpeed = 0.0f;
+	forwardSpeed = 0.0f;
 	float strafeSpeed = 0.0f;
 	// wasd movement
 	if (inputState.keyboard.getKeyValue(SDL_SCANCODE_W))
@@ -165,13 +165,16 @@ void FPSActor::fixCollisions()
 {
 	// Need to recompute world transform to update world box
 	computeWorldTransform();
+	InputState inputState;
 
+	//forwardSpeed = 0.0f;
 
 	const AABB& playerBox = boxComponent->getWorldBox();
 	Vector3 pos = getPosition();
 
 	bool isCubeIntersect;
 	bool isPlaneIntersect;
+	bool onPlatform = false;
 
 	auto& cubes = getGame().getCubes();
 	for (auto ca : cubes)
@@ -180,23 +183,27 @@ void FPSActor::fixCollisions()
 		if (Collisions::intersect(playerBox, cubeBox))
 		{
 			isCubeIntersect = true;
-			//cout << "Cube xxx intersection  " << getGame().elevatorSpeed << "  "  << endl;
-
-			//pos.y = getGame().elevatorSpeed + 400.0f;
+				
 
 			if (ca->getLable() == "platform")
 			{
-				pos.y = getGame().getCubes().at(1)->getPosition().y;
-				setPosition(pos);
-			}
 
+
+				pos.y = getGame().getCubes().at(1)->getPosition().y;
+				pos.z = getGame().getCubes().at(1)->getPosition().z + 150.0f;
+
+			}
+				
+			
 
 			if (ca->getLable() == "elevator")
 			{
 
 				pos.z = getGame().getCubes().at(0)->getPosition().z + 150.0f;
-				setPosition(pos);
+				//setPosition(pos);
 			}
+
+			setPosition(pos);
 		}
 		else
 			isCubeIntersect = false;
