@@ -167,11 +167,11 @@ void FPSActor::fixCollisions()
 	computeWorldTransform();
 	InputState inputState;
 
-	//forwardSpeed = 0.0f;
+	//move = 0.0f;
 
 	const AABB& playerBox = boxComponent->getWorldBox();
 	Vector3 pos = getPosition();
-
+	
 	bool isCubeIntersect;
 	bool isPlaneIntersect;
 	bool onPlatform = false;
@@ -187,13 +187,18 @@ void FPSActor::fixCollisions()
 
 			if (ca->getLable() == "platform")
 			{
+				if (forwardSpeed > 0)
+					move += 5;
+				if (forwardSpeed < 0)
+					move -= 5;
 
-
-				pos.y = getGame().getCubes().at(1)->getPosition().y;
+				pos.y = getGame().getCubes().at(1)->getPosition().y + move;
 				pos.z = getGame().getCubes().at(1)->getPosition().z + 150.0f;
 
+				cout << move << "     " << forwardSpeed << endl;
+
 			}
-				
+			
 			
 
 			if (ca->getLable() == "elevator")
@@ -205,12 +210,18 @@ void FPSActor::fixCollisions()
 
 			setPosition(pos);
 		}
-		else
+		else if (!Collisions::intersect(playerBox, cubeBox))
+		{
+			cout << "No collision" << endl;
 			isCubeIntersect = false;
+
+		}
 
 		
 
+		
 	}
+	
 	
 
 

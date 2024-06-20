@@ -26,6 +26,7 @@ private:
 	//SoundEvent footstep;
 	float lastFootstep;
 	float forwardSpeed;
+	float move = 0.0f;
 	class BoxComponent* boxComponent;
 
 };
